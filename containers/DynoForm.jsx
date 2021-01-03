@@ -7,13 +7,26 @@ const DynoForm = ({ config: { questions } }) => {
     return <Box>Invalid form config</Box>;
   }
   return (
-    <Box width={[1, 400]}>
-      <Text as="legend" fontSize={4} fontWeight="bold" mb={3} color="primary" textAlign="center">
+    <Box {...styles.wrapper}>
+      <Text as="legend" {...styles.title}>
         User Information
       </Text>
       <DynoFormComponent formGroups={questions} />
     </Box>
   );
+};
+
+const styles = {
+  wrapper: {
+    width: [1, 400],
+  },
+  title: {
+    fontSize: 4,
+    fontWeight: "bold",
+    mb: 3,
+    color: "primary",
+    textAlign: "center",
+  },
 };
 
 export default DynoForm;

@@ -15,23 +15,11 @@ const DynoForm = ({ formGroups }) => {
   const renderFieldInput = (name, type, options) => {
     switch (type) {
       case "text":
-        return (
-          <Input
-            mt={1}
-            sx={{ borderColor: "lightgray" }}
-            id={name}
-            name={name}
-          />
-        );
+        return <Input {...styles.formInput} id={name} name={name} />;
 
       case "dropdown":
         return (
-          <Select
-            mt={1}
-            sx={{ borderColor: "lightgray" }}
-            id={name}
-            name={name}
-          >
+          <Select {...styles.formInput} id={name} name={name}>
             {Object.entries(options).map(([_, option]) => (
               <option key={option}>{option}</option>
             ))}
@@ -41,15 +29,8 @@ const DynoForm = ({ formGroups }) => {
   };
 
   const renderFormCard = ({ title, fields }) => (
-    <Card
-      p={4}
-      my={2}
-      sx={{ borderRadius: 5, boxShadow: "0 0 10px -5px rgba(0, 0, 0, 0.2)" }}
-      key={title}
-    >
-      <Text fontSize={3} mb={3} color="primary" textAlign="center">
-        {title}
-      </Text>
+    <Card {...styles.card} key={title}>
+      <Text {...styles.cardTitle}>{title}</Text>
       {fields.map(({ name, label, type, options }) => (
         <Box key={name} my={3}>
           <Label htmlFor={name}>{label}</Label>
@@ -60,13 +41,38 @@ const DynoForm = ({ formGroups }) => {
   );
 
   return (
-    <Box textAlign="center" my={2} as="form" onSubmit={handleSubmit}>
+    <Box {...styles.wrapper} as="form" onSubmit={handleSubmit}>
       {formGroups.map(renderFormCard)}
-      <Button my={3} backgroundColor="red" width={1 / 3}>
-        Submit
-      </Button>
+      <Button {...styles.submit}>Submit</Button>
     </Box>
   );
+};
+
+const styles = {
+  wrapper: {
+    textAlign: "center",
+    my: 2,
+  },
+  card: {
+    p: 4,
+    my: 2,
+    sx: { borderRadius: 5, boxShadow: "0 0 10px -5px rgba(0, 0, 0, 0.2)" },
+  },
+  cardTitle: {
+    fontSize: 3,
+    mb: 3,
+    color: "primary",
+    textAlign: "center",
+  },
+  formInput: {
+    mt: 1,
+    sx: { borderColor: "lightgray" },
+  },
+  submit: {
+    my: 3,
+    backgroundColor: "red",
+    width: 1 / 3,
+  },
 };
 
 export default DynoForm;
