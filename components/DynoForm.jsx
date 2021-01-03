@@ -7,6 +7,7 @@ const DynoForm = ({ formGroups }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
+    console.clear();
     for (let pair of data.entries()) {
       console.log(`${camelCase(pair[0])}: ${pair[1]},`);
     }
